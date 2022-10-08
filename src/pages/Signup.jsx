@@ -31,9 +31,8 @@ const Signup = () => {
           <input type="password" value={cpass} className="form-control shadow-lg" onChange={(e) => {setCpass(e.target.value)}} placeholder="Enter Password"/>
           <button type='submit' className="btn bg-primary text-white mt-3 batn w-100">SIGNUP</button>
           </form>
-          <div className="text-center mt-3">
-          
-          <Link to="/login" className="">Already have an account!</Link>
+          <div className="text-center botm_link mt-4">Already have an account!
+          <Link to="/login" className="">Login here</Link>
           </div>
         </div>
       </div>

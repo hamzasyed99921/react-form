@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import {BiUser} from 'react-icons/bi'
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -17,13 +17,15 @@ const Login = () => {
       <div className="container " style={{ height: "100%",paddingBottom: '120px' }}>
         <div className="login_form d-flex  justify-content-center py-5">
           <div
-            className="card shadow-lg align-items-center  py-5 "
-            style={{ width: "24rem" }}
+            className="card shadow-lg   py-5 "
+            style={{ width: "26rem" }}
           >
-            <h3>Login</h3>
-            <div className="card-body py-3 ">
+            <h3 className="text-center">Login</h3>
+            <div className="card-body  ">
               <form onSubmit={handleFun}>
+                <div className="input_icons">
                 <label>Username:</label>
+                
                 <input
                   type="text"
                   className="form-control"
@@ -34,6 +36,7 @@ const Login = () => {
                   placeholder="Enter your username"
                 />
                 <label className='mt-3'>Password:</label>
+                {/* <span className=""><BiUser className="icon" color="red"/></span> */}
                 <input
                   type="password"
                   value={pass}
@@ -45,14 +48,16 @@ const Login = () => {
                 />
                 <button
                   type="submit"
-                  className="btn bg-primary text-white batn mt-3 w-100"
+                  className="btn bg-primary text-white batn mt-5 w-100"
                 >
                   LOGIN
                 </button>
+                </div>
               </form>
-              <div className="text-center mt-3">
+              <div className="text-center botm_link  mt-3">
+              Create account!
                 <Link to="/signup" className="">
-                  Create account!
+                  SignUp
                 </Link>
               </div>
             </div>
