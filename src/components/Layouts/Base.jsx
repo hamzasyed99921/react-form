@@ -7,7 +7,7 @@ const Base = (props) => {
     <>
         <Header/>
         {props.children}
-        {/* <Footer/> */}
+        <Footer/>
     </>
   )
 }

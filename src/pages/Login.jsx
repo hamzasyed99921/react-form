@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {BiUser} from 'react-icons/bi'
 
 const Login = () => {
   const [user, setUser] = useState("");
@@ -27,25 +26,13 @@ const Login = () => {
                 <label>Username:</label>
                 
                 <input
-                  type="text"
-                  className="form-control"
-                  value={user}
-                  onChange={(e) => {
-                    setUser(e.target.value);
-                  }}
-                  placeholder="Enter your username"
-                />
+                  type="text"className="form-control" value={user} onChange={(e) => {setUser(e.target.value); }}
+                  placeholder="Enter your username" />
                 <label className='mt-3'>Password:</label>
-                {/* <span className=""><BiUser className="icon" color="red"/></span> */}
-                <input
-                  type="password"
-                  value={pass}
-                  className="form-control"
-                  onChange={(e) => {
-                    setPass(e.target.value);
-                  }}
-                  placeholder="Enter Password"
-                />
+            
+                <input type="password" value={pass}
+                  className="form-control"onChange={(e) => {setPass(e.target.value);}}
+                  placeholder="Enter Password"/>
                 <button
                   type="submit"
                   className="btn bg-primary text-white batn mt-5 w-100"

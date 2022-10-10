@@ -1,6 +1,5 @@
 import React from 'react'
-import Hero from '../components/Elements/Hero'
-import Login from './Login'
+import Hero from '../components/Elements/Hero';
 
 const Home = () => {
   return (

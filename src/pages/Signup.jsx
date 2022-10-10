@@ -10,8 +10,12 @@ const Signup = () => {
       const handleSubmit = (event) => {
         event.preventDefault();
         const data = {user,contact,pass,cpass};
-        console.log(data);
+        localStorage.setItem("formData",JSON.stringify(data));
+        sessionStorage.setItem("formData",JSON.stringify(data));
+        
     }
+    console.log(localStorage.getItem('formData'));
+    console.log(sessionStorage.getItem('formData'));
   return (
     <>
         <div className="bg_color">
