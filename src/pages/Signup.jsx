@@ -12,6 +12,7 @@ const Signup = () => {
         const data = {user,contact,pass,cpass};
         localStorage.setItem("formData",JSON.stringify(data));
         sessionStorage.setItem("formData",JSON.stringify(data));
+
         
     }
     console.log(localStorage.getItem('formData'));

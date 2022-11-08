@@ -35,7 +35,7 @@ const Login = () => {
                   placeholder="Enter Password"/>
                 <button
                   type="submit"
-                  className="btn bg-primary text-white batn mt-5 w-100"
+                  className="btn bg-primary text-white batn mt-4 w-100"
                 >
                   LOGIN
                 </button>
