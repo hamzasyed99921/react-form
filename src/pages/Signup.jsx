@@ -37,7 +37,7 @@ const Signup = () => {
           <button type='submit' className="btn bg-primary text-white mt-3 batn w-100">SIGNUP</button>
           </form>
           <div className="text-center botm_link mt-4">Already have an account!
-          <Link to="/login" className="">Login here</Link>
+          <Link to="/" className="">Login here</Link>
           </div>
         </div>
       </div>

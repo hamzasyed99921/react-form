@@ -61,7 +61,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link sign_in" to="/login">
+                <Link className="nav-link sign_in" to="/">
                   Sign in
                 </Link>
               </li>
