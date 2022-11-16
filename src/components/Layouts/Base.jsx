@@ -5,7 +5,7 @@ import Header from './Header'
 const Base = (props) => {
   return (
     <>
-        <Header/>
+        {/* <Header/> */}
         {props.children}
         <Footer/>
     </>

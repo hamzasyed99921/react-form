@@ -1,56 +1,52 @@
 import React,{useState, useEffect} from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import {doc, setDoc,addDoc } from "firebase/firestore";
-import { db, storage } from "../../firebase";
-import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { db } from "../../firebase";
 import {getAuth} from 'firebase/auth'
+import { collection, getDocs,   } from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {v4} from 'uuid'
 
-
-const Hero = () => {
-
-  const [username, setUsername] = useState('');
-  const [contact, setContact] = useState('');
-  const [address, setAddress] = useState('');
-  const [ImageUpload, setImageUpload] = useState(null);
-  const navigate = useNavigate();
-
+const Update = () => {
+    const [username, setUsername] = useState('');
+    const [contact, setContact] = useState('');
+    const [address, setAddress] = useState('');
+    const [user, setUser] = useState([]);
+    const navigate = useNavigate();
+    const userCollecionRef = collection(db, "user");
   useEffect(() => {
-    let authToken = sessionStorage.getItem('auth');
-    if(authToken){
-      navigate('/hero')
-    }if(!authToken){
+    const getUsers = async () => {
+      const data = await getDocs(userCollecionRef);
+      setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    //   console.log("Document data:", data);
+    };
+    getUsers();
+  });
+    // useEffect(() => {
+    //   let authToken = sessionStorage.getItem('auth');
+    //   if(authToken){
+    //     navigate('/hero')
+    //   }if(!authToken){
+    //     navigate('/')
+    //   }
+    // }, [])
+  
+    const logout = ( ) => {
+      sessionStorage.removeItem('auth');
       navigate('/')
     }
-  }, [])
-
-  const logout = ( ) => {
-    sessionStorage.removeItem('auth');
-    navigate('/')
-    toast('LogOut SuccessFully!')
-  }
-
-  const userDetails = (e) => {
-    e.preventDefault();
-    const auth = getAuth();
-    const user = auth.currentUser;
-    setDoc(doc(db, "user", user.uid), {
-      username,
-      contact,
-      address
-    },setUsername(''),setContact('') , setAddress(''));
-    toast('Data Added SuccessFully')
-    
-    // if(ImageUpload == null) return;
-    // const imageRef  = storageRef(storage, `images/${ImageUpload.name + v4()}`);
-    // uploadBytes(imageRef , ImageUpload).then(() => {
-    //   alert('images upload')
-    // })
-   
-
-  }
+  
+    const userDetails = (e) => {
+      e.preventDefault();
+      const auth = getAuth();
+      const user = auth.currentUser;
+      setDoc(doc(db, "user", user.uid), {
+        username,
+        contact,
+        address
+      },setUsername(''),setContact('') , setAddress(''));
+      console.log('Data Added');
+    }
   return (
     <>
         <div className="hero_bg">
@@ -65,36 +61,35 @@ const Hero = () => {
             style={{ width: "26rem" }}
             data-aos="zoom-in"
           >
-            <h3 className="text-center">User Details</h3>
+            <h3 className="text-center">Update User</h3>
             <div className="card-body  ">
-              <form >
+              {user.map((user) => {
+                return <form >
                 <div className="input_icons">
                 <label>UserName:</label>
                 
                 <input
-                  type="text"className="form-control" value={username} onChange={(e) => {setUsername(e.target.value); }}
+                  type="text"className="form-control" value={user.username} onChange={(e) => {setUsername(e.target.value); }}
                   placeholder="Enter your Name" />
                 <label className='mt-3'>Contact:</label>
             
-                <input type="text" value={contact}
+                <input type="text" value={user.contact}
                   className="form-control"onChange={(e) => {setContact(e.target.value);}}
                   placeholder="Enter Your Contact"/>
                 <label className='mt-3'>Address:</label>
             
-                <input type="text" value={address}
+                <input type="text" value={user.address}
                   className="form-control"onChange={(e) => {setAddress(e.target.value);}}
                   placeholder="Enter your Address"/>
-                  {/* <label className='mt-3'>Upload File:</label>
-                <input type="file" 
-                  className="form-control"onChange={(e) => {setImageUpload(e.target.files[0]);}} /> */}
                 <button
                   className="btn bg-primary text-white batn mt-4 w-100"
                   onClick={userDetails}
                 >
-                  Add Details
+                  SUBMIT
                 </button>
                 </div>
               </form>
+              })}
               
             </div>
           </div>
@@ -102,7 +97,7 @@ const Hero = () => {
          </div>
         </div>
     </>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Update
