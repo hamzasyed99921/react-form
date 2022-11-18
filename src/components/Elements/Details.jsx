@@ -10,11 +10,11 @@ const Details = () => {
   const [user, setUser] = useState([]);
   const auth = getAuth();
   const id = auth.currentUser;
-  //   console.log(id.uid);
-  const userCollecionRef = collection(db, "user");
+    // console.log(id.uid);
+  const userCollectionRef = collection(db, "user");
   useEffect(() => {
     const getUsers = async () => {
-      const data = await getDocs(userCollecionRef);
+      const data = await getDocs(userCollectionRef);
       setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       // console.log("Document data:", data);
     };
@@ -22,12 +22,12 @@ const Details = () => {
   });
 
   const deleteUser = (id) => {
-    console.log(id);
+    // console.log(id);
     deleteDoc(doc(db, "user", id));
     toast('Data Deleted!')
   };
   return (
-    
+
     <>
       <div>
         <div className="container mt-5">
@@ -43,7 +43,7 @@ const Details = () => {
                   <th scope="col">Contact</th>
                   <th scope="col">Address</th>
                   <th scope="col">Delete</th>
-                  {/* <th scope="col">Edit</th> */}
+                  <th scope="col">Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,7 +66,7 @@ const Details = () => {
                               Delete
                             </button>
                           </td>
-                          {/* <td><Link className="btn bg-secondary text-white" to='/update'>Edit</Link></td> */}
+                          <td><Link className="btn bg-secondary text-white" to={`/update/${user.id}`}>Edit</Link></td>
                         </tr>
                       </>
                     );

@@ -71,6 +71,12 @@ const Login = () => {
                   SignUp
                 </Link>
               </div>
+              <div className="text-center botm_link  mt-3">
+              Forgot Password!
+                <Link to="/forget" className="">
+                  Click Here
+                </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React,{useState, useEffect} from "react";
 import {Link,useNavigate} from 'react-router-dom'
 import {doc, setDoc,addDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
-import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {getAuth} from 'firebase/auth'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,19 +36,20 @@ const Hero = () => {
     e.preventDefault();
     const auth = getAuth();
     const user = auth.currentUser;
+    console.log(user.uid);
     setDoc(doc(db, "user", user.uid), {
       username,
       contact,
       address
     },setUsername(''),setContact('') , setAddress(''));
     toast('Data Added SuccessFully')
+     if(ImageUpload == null) return;
+    const file = new Date().setTime() + ImageUpload.name;
+    const imageRef  = ref(storage, file);
+    uploadBytes(imageRef , ImageUpload).then(() => {
+      // alert('images upload')
+    }, setImageUpload(null))
     
-    // if(ImageUpload == null) return;
-    // const imageRef  = storageRef(storage, `images/${ImageUpload.name + v4()}`);
-    // uploadBytes(imageRef , ImageUpload).then(() => {
-    //   alert('images upload')
-    // })
-   
 
   }
   return (
@@ -84,9 +85,9 @@ const Hero = () => {
                 <input type="text" value={address}
                   className="form-control"onChange={(e) => {setAddress(e.target.value);}}
                   placeholder="Enter your Address"/>
-                  {/* <label className='mt-3'>Upload File:</label>
+                  <label className='mt-3'>Upload File:</label>
                 <input type="file" 
-                  className="form-control"onChange={(e) => {setImageUpload(e.target.files[0]);}} /> */}
+                  className="form-control"onChange={(e) => {setImageUpload(e.target.files[0]);}} />
                 <button
                   className="btn bg-primary text-white batn mt-4 w-100"
                   onClick={userDetails}

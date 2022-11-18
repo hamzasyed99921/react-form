@@ -13,6 +13,8 @@ import Hero from "./components/Elements/Hero";
 import { ToastContainer, toast } from "react-toastify";
 import Details from "./components/Elements/Details";
 import Update from "./components/Elements/Update";
+import ForgotPassword from "./components/Elements/ForgotPassword";
+import ResetPassword from "./components/Elements/ResetPassword";
 
 function App() {
   useEffect(() => {
@@ -29,7 +31,9 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/hero" element={<Hero />} />
             <Route path="/details" element={<Details/>} />
-            {/* <Route path="/update" element={<Update/>} /> */}
+            <Route path="/update/:id" element={<Update/>} />
+            <Route path="/forget" element={<ForgotPassword/>} />
+            <Route path="/reset-password" element={<ResetPassword/>} />
           </Routes>
         </Base>
     </div>
