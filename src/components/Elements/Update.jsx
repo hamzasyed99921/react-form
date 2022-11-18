@@ -11,7 +11,7 @@ const Update = () => {
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
   const navigate = useNavigate();
-
+  
   const updateUser = (e) => {
     e.preventDefault();
     const docRef = doc(db, "user", id);
@@ -23,7 +23,7 @@ const Update = () => {
     setDoc(docRef , data ,{ merge: true } ).then(() =>{
       toast('Data Updated SuccessFully')
     },setUsername(''),setContact('') , setAddress('')) 
-    
+ 
   }
 
 
